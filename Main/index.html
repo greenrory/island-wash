@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Island Wash | Mobile Car Wash - Sullivan's Island</title>
+    <link rel="stylesheet" href="https://use.typekit.net/[your-kit-code].css">
     <style>
         * {
             margin: 0;
@@ -11,18 +12,28 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #book {
+            scroll-margin-top: 2rem;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background: white;
+            background: linear-gradient(to bottom, white, #fafafa);
             color: #000;
             line-height: 1.5;
         }
 
         .header {
-            padding: 2rem 5%;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
@@ -30,6 +41,7 @@
             align-items: center;
             text-decoration: none;
             color: #000;
+            gap: 0.25rem;
         }
 
         .logo img {
@@ -38,89 +50,519 @@
         }
 
         .logo-text {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-left: 0.5rem;
+            font-family: 'Cooper Black', serif;
+            font-size: 1.4rem;
             color: #1e3d59;
+            text-transform: lowercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-links a {
+            font-family: 'Cooper Black', serif;
             text-decoration: none;
             color: #000;
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 1.1rem;
         }
 
         .hero {
-            padding: 4rem 5%;
+            padding: 6rem 5% 12rem;  /* Reduced top padding */
+            min-height: 60vh;  /* Set minimum height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;  /* Center content vertically */
+            align-items: center;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 500;
+            font-size: 3rem;
+            font-weight: 400;
             line-height: 1.2;
             margin-bottom: 1rem;
-            color: #000;
+            color: #1a1a1a;
+            max-width: 700px;
+            margin: 0 auto 1rem;
         }
 
         .location {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 2rem;
+            display: none;
         }
 
         .cta-button {
             display: inline-block;
             background: #000;
             color: white;
-            padding: 1rem 3rem;
-            border-radius: 2rem;
+            padding: 1.1rem 3rem;
+            border-radius: 100px;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
+            font-weight: 400;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .cta-button:hover {
-            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         /* Dinosaur logo styles */
         .dino-logo {
-            fill: #17b5c0;
-            width: 80px;
-            height: auto;
+            width: 55px;
+            height: 55px;
+            margin-right: 4px;
+        }
+
+        .announcement-banner {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 2rem;
+            background: rgba(124, 181, 217, 0.12);
+            border-radius: 100px;
+            color: #1e3d59;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 12px rgba(124, 181, 217, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .announcement-banner:hover {
+            transform: translateY(-2px);
+        }
+
+        .learn-more {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .learn-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Update booking section styles */
+        .booking-section {
+            padding: 2rem 5% 6rem;  /* Added padding back */
+            text-align: center;
+            background: #f8f9fa;
+            margin-top: -8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.4s ease;
+        }
+
+        .booking-container:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Style the iframe */
+        .booking-container iframe {
+            width: 100%;
+            height: 800px;
+            min-height: 800px;
+            border: none;
+            display: block;
+            margin: 0 auto;
+            border-radius: 16px;
+        }
+
+        .footer {
+            background: #f8f9fa;  /* Match the gradient end color */
+            padding: 8rem 5% 6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-section h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #1e3d59;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p {
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        .footer-section a {
+            color: #1e3d59;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #7cb5d9;
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu-icon {
+            width: 24px;
+            height: 24px;
+            color: #1e3d59;
+        }
+
+        .close-menu {
+            display: none;  /* Hide by default */
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                display: flex;  /* Always flex, but transformed off-screen */
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 250px;
+                background: white;
+                padding: 5rem 2rem 2rem;
+                flex-direction: column;
+                gap: 2rem;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+                transform: translateX(100%);  /* Move off-screen */
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);  /* Smooth animation */
+                opacity: 0;  /* Start transparent */
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                          opacity 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);  /* Slide in */
+                opacity: 1;  /* Fade in */
+            }
+
+            .close-menu {
+                display: block;  /* Show only on mobile */
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                background: none;
+                border: none;
+                padding: 0.5rem;
+                cursor: pointer;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero {
+                padding: 4rem 5% 10rem;  /* Adjusted for mobile */
+                min-height: 50vh;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                padding: 0 1rem;
+            }
+
+            .booking-section {
+                margin-top: -6rem;
+                padding: 1.5rem 1rem 4rem;  /* Added padding back for mobile */
+            }
+
+            .footer {
+                padding: 6rem 1rem 4rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;  /* Stack footer sections on mobile */
+                gap: 3rem;
+            }
+
+            .booking-container {
+                padding: 1rem;
+            }
+
+            .announcement-banner {
+                margin: 0 1rem 1.5rem;
+            }
+
+            .about-section {
+                padding: 4rem 1rem;
+            }
+
+            .about-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .about-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .price-card {
+                padding: 2rem;
+                margin: 0 0.5rem;
+            }
+        }
+
+        /* Prevent horizontal scroll on all screen sizes */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Ensure iframe is responsive */
+        .booking-container iframe {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        /* Add padding to header on mobile */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+        }
+
+        .pricing-section {
+            padding: 8rem 5% 12rem;  /* Increased bottom padding */
+            background: linear-gradient(to bottom, white 80%, #f8f9fa);
+            margin-bottom: -4rem;  /* Create overlap with footer */
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .pricing-title {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #1e3d59;
+            margin-bottom: 4rem;  /* Increased spacing */
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;  /* Increased spacing */
+        }
+
+        .price-card {
+            background: white;  /* Changed from #f8f9fa */
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .price-card p {
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-section {
+                padding: 4rem 1rem 8rem;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pricing-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Remove about-related styles */
+        .about-section,
+        .about-container,
+        .about-title,
+        .about-text {
+            display: none;
+        }
+
+        @font-face {
+            font-family: 'Cooper Black';
+            src: url('path-to-cooper-black.woff2') format('woff2'),
+                 url('path-to-cooper-black.woff') format('woff');
         }
     </style>
 </head>
 <body>
     <header class="header">
         <a href="/" class="logo">
-            <svg class="dino-logo" viewBox="0 0 100 100">
-                <!-- Replace with actual dinosaur SVG path -->
-                <path d="M20,50 L80,50 M50,20 L50,80" stroke="currentColor" stroke-width="2"/>
+            <svg class="dino-logo" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="56" height="56" fill="white"/>
+                <path d="M16 20h4v16h-4V20zM36 20h4v16h-4V20z" fill="#7cb5d9"/>
+                <path d="M22 20h12v4H22v-4zM22 26h12v4H22v-4zM22 32h12v4H22v-4z" fill="#7cb5d9"/>
             </svg>
             <span class="logo-text">island wash</span>
         </a>
+        
+        <button class="mobile-menu-button" onclick="toggleMenu()">
+            <svg class="mobile-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+        </button>
+
         <nav class="nav-links">
+            <button class="close-menu" onclick="toggleMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
             <a href="#book">Book Online</a>
             <a href="#prices">Prices</a>
-            <a href="#about">About Us</a>
         </nav>
     </header>
 
     <main class="hero">
+        <div class="announcement-banner">
+            Sullivans Island
+        </div>
         <h1 class="hero-title">Carwash - from the comfort of your own home</h1>
-        <p class="location">(Sullivans Island)</p>
         <a href="#book" class="cta-button">Book Online</a>
     </main>
+
+    <section id="book" class="booking-section">
+        <div class="booking-container">
+            <iframe 
+                src="https://www.aquaedge.co/share/cm79fzir10003l7035jwnzcsp" 
+                frameborder="0"
+            ></iframe>
+        </div>
+    </section>
+
+    <section id="prices" class="pricing-section">
+        <div class="pricing-container">
+            
+            <div class="pricing-cards">
+                <div class="price-card">
+                    <h3>Golf Cart</h3>
+                    <div class="price">$40</div>
+                    <p>Golf Cart cleaning</p>
+                </div>
+
+                <div class="price-card">
+                    <h3>Basic Wash</h3>
+                    <div class="price">$40</div>
+                    <p>Exterior or Interior cleaning</p>
+                </div>
+
+                <div class="price-card">
+                    <h3>Complete Package</h3>
+                    <div class="price">$80</div>
+                    <p>Exterior and Interior cleaning</p>
+                </div>
+            </div>
+
+            <a href="#book" class="cta-button">Book Now</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>Location</h2>
+                <p>Sullivans Island, SC</p>
+            </div>
+            
+            <div class="footer-section">
+                <h2>Hours</h2>
+                <p>Monday - Sunday</p>
+                <p>Operating Hours: 8AM - 8:00 PM</p>
+            </div>
+            
+            <div class="footer-section">
+                <h2>Questions?</h2>
+                <p>Contact</p>
+                <a href="mailto:islandwashco@gmail.com">islandwashco@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Add click handlers to close menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
